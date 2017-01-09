@@ -20,9 +20,9 @@ void I2C1_Init(void){
   GPIO_PORTA_AMSEL_R &= ~0xC0;          // 7) disable analog functionality on PA6,7
 	
   I2C1_MCR_R = I2C_MCR_MFE;      				// 9) master function enable
-  I2C1_MTPR_R = 9;              				// 8) configure for 400 kbps clock
-  // 20*(TPR+1)*12.5ns = 10us, with TPR=39 --> 100kbps
-	//  with TPR=9 --> 400kbps
+  I2C1_MTPR_R = 2;              				// 8) configure for 333.3 kbps clock
+  // 20*(TPR+1)*50ns = 3000ns, 
+	//  with TPR=2 --> 400kbps
 }
 
 //========================================//
@@ -165,25 +165,10 @@ void I2C3_Init(void){
   GPIO_PORTD_PCTL_R = (GPIO_PORTD_PCTL_R&0xFFFFFF00)+0x00000033;
   GPIO_PORTD_AMSEL_R &= ~0x03;          // 7) disable analog functionality on PD1,0
   I2C3_MCR_R = I2C_MCR_MFE;      // 9) master function enable
-  I2C3_MTPR_R = 9;              // 8) configure for 400 kbps clock
-  // 20*(TPR+1)*12.5ns = 2500ns, with TPR=9
+  I2C3_MTPR_R = 2;              // 8) configure for 333.3 kbps clock
+  // 20*(TPR+1)*50ns = 3000ns, with TPR=2
 }
 
-void I2C3_Init_8MHz(void){
-  SYSCTL_RCGCI2C_R |= 0x0008;           // activate I2C3
-  SYSCTL_RCGCGPIO_R |= 0x0008;          // activate port D
-  while((SYSCTL_PRGPIO_R&0x0008) == 0){};// ready?
-
-  GPIO_PORTD_AFSEL_R |= 0x03;           // 3) enable alt funct on PD1,0
-  GPIO_PORTD_ODR_R |= 0x02;             // 4) enable open drain on PD1(SDA) only
-  GPIO_PORTD_DEN_R |= 0x03;             // 5) enable digital I/O on PD1,0
-                                        // 6) configure PD1,0 as I2C
-  GPIO_PORTD_PCTL_R = (GPIO_PORTD_PCTL_R&0xFFFFFF00)+0x00000033;
-  GPIO_PORTD_AMSEL_R &= ~0x03;          // 7) disable analog functionality on PD1,0
-  I2C3_MCR_R = I2C_MCR_MFE;      // 9) master function enable
-  I2C3_MTPR_R = 0;              // 8) configure for 400 kbps clock
-  // 20*(TPR+1)*125ns = 2500ns, with TPR=0
-}
 //========================================//
 //	I2C3 Functions:
 //========================================//

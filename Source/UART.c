@@ -41,7 +41,7 @@
 
 //------------UART_Init------------
 // Wait for new serial port input
-// Initialize the UART for 115,200 baud rate (assuming 40 MHz UART clock),
+// Initialize the UART for 115,200 baud rate (assuming 20 MHz UART clock),
 // 8 bit word length, no parity bits, one stop bit, FIFOs enabled
 // Input: none
 // Output: none
@@ -50,8 +50,8 @@ void UART_Init(void){
   SYSCTL_RCGCGPIO_R |= 0x01; // activate port A
   while((SYSCTL_PRGPIO_R&0x0001) == 0){};// ready?
   UART0_CTL_R &= ~UART_CTL_UARTEN;      // disable UART
-  UART0_IBRD_R = 21;                    // IBRD = int(40,000,000 / (16 * 115,200)) = int(21.7014)
-  UART0_FBRD_R = 45;                    // FBRD = int(0.7014 * 64 + 0.5) = 45
+  UART0_IBRD_R = 10;                    // IBRD = int(20,000,000 / (16 * 115,200)) = int(10.8507)
+  UART0_FBRD_R = 54;                    // FBRD = int(0.8507 * 64 + 0.5) = 54
                                         // 8 bit word length (no parity bits, one stop bit, FIFOs)
   UART0_LCRH_R = (UART_LCRH_WLEN_8|UART_LCRH_FEN);
   UART0_CTL_R |= UART_CTL_UARTEN;       // enable UART
@@ -68,8 +68,8 @@ void UART_Init_9600bps(void){
   SYSCTL_RCGCGPIO_R |= 0x01; // activate port A
   while((SYSCTL_PRGPIO_R&0x0001) == 0){};// ready?
   UART0_CTL_R &= ~UART_CTL_UARTEN;      // disable UART
-  UART0_IBRD_R = 52;                    // IBRD = int(8,000,000 / (16 * 9,600)) = int(52.0833)
-  UART0_FBRD_R = 5;                     // FBRD = int(0.0833 * 64 + 0.5) = 5
+  UART0_IBRD_R = 130;                    // IBRD = int(20,000,000 / (16 * 9,600)) = int(130.2083)
+  UART0_FBRD_R = 13;                     // FBRD = int(0.2083 * 64 + 0.5) = 13
                                         // 8 bit word length (no parity bits, one stop bit, FIFOs)
   UART0_LCRH_R = (UART_LCRH_WLEN_8|UART_LCRH_FEN);
   UART0_CTL_R |= UART_CTL_UARTEN;       // enable UART

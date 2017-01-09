@@ -27,12 +27,11 @@ extern "C" {
 	
 // The #define statement SYSDIV2 initializes
 // the PLL to the desired frequency.
-#define SYSDIV2 9
-// bus frequency is 400MHz/(SYSDIV2+1) = 400MHz/(9+1) = 40 MHz
+#define SYSDIV2 19
+// bus frequency is 400MHz/(SYSDIV2+1) = 400MHz/(19+1) = 20 MHz
 
 // configure the system to get its clock from the PLL
 void PLL_Init(void);
-void PLL_Init_8MHz(void);
 
 /*
 SYSDIV2  Divisor  Clock (MHz)
