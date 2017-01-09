@@ -411,7 +411,7 @@
             <File>
               <FileName>startup_rvmdk.S</FileName>
               <FileType>2</FileType>
-              <FilePath>F:\Microcontroller_Projects\IMU_10DOF\Startup\startup_rvmdk.S</FilePath>
+              <FilePath>.\Startup\startup_rvmdk.S</FilePath>
             </File>
           </Files>
         </Group>

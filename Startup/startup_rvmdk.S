@@ -35,7 +35,7 @@
 ; <o> Stack Size (in Bytes) <0x0-0xFFFFFFFF:8>
 ;
 ;******************************************************************************
-Stack   EQU     0x00000400
+Stack   EQU     0x00000200
 
 ;******************************************************************************
 ;
@@ -98,11 +98,11 @@ __Vectors
         DCD     0                           ; Reserved
         DCD     0                           ; Reserved
         DCD     0                           ; Reserved
-        DCD     SVC_Handler                 ; SVCall Handler
+        DCD     vPortSVCHandler                 ; SVCall Handler
         DCD     DebugMon_Handler            ; Debug Monitor Handler
         DCD     0                           ; Reserved
-        DCD     PendSV_Handler              ; PendSV Handler
-        DCD     SysTick_Handler             ; SysTick Handler
+        DCD     xPortPendSVHandler              ; PendSV Handler
+        DCD     xPortSysTickHandler             ; SysTick Handler
         DCD     GPIOPortA_Handler           ; GPIO Port A
         DCD     GPIOPortB_Handler           ; GPIO Port B
         DCD     GPIOPortC_Handler           ; GPIO Port C
@@ -316,23 +316,23 @@ UsageFault_Handler\
                 EXPORT  UsageFault_Handler        [WEAK]
                 B       .
                 ENDP
-SVC_Handler     PROC
-                EXPORT  SVC_Handler               [WEAK]
-                B       .
-                ENDP
+vPortSVCHandler     PROC
+					EXPORT  vPortSVCHandler               [WEAK]
+					B       .
+					ENDP
 DebugMon_Handler\
                 PROC
                 EXPORT  DebugMon_Handler          [WEAK]
                 B       .
                 ENDP
-PendSV_Handler  PROC
-                EXPORT  PendSV_Handler            [WEAK]
-                B       .
-                ENDP
-SysTick_Handler PROC
-                EXPORT  SysTick_Handler           [WEAK]
-                B       .
-                ENDP
+xPortPendSVHandler  PROC
+					EXPORT  xPortPendSVHandler            [WEAK]
+					B       .
+					ENDP
+xPortSysTickHandler PROC
+					EXPORT  xPortSysTickHandler           [WEAK]
+					B       .
+					ENDP
 IntDefaultHandler\
                 PROC
 

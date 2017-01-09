@@ -14,7 +14,15 @@
 // Initialize SysTick with busy wait running at bus clock.
 void SysTick_Init(void){
   NVIC_ST_CTRL_R = 0;                   // disable SysTick during setup
-  NVIC_ST_RELOAD_R = 19999;  // System clock 20MHz: 50ns*(19999+1) = 1 miliseconds
+  NVIC_ST_RELOAD_R = 39999;  // System clock 40MHz: 25ns*(39999+1) = 1 miliseconds
+  NVIC_ST_CURRENT_R = 0;                // any write to current clears it
+                                        // enable interrupt
+  NVIC_ST_CTRL_R = NVIC_ST_CTRL_CLK_SRC|NVIC_ST_CTRL_ENABLE|NVIC_ST_CTRL_INTEN;
+}
+
+void SysTick_Init_8MHz(void){
+  NVIC_ST_CTRL_R = 0;                   // disable SysTick during setup
+  NVIC_ST_RELOAD_R = 7999;  // System clock 8MHz: 125ns*(7999+1) = 1 miliseconds
   NVIC_ST_CURRENT_R = 0;                // any write to current clears it
                                         // enable interrupt
   NVIC_ST_CTRL_R = NVIC_ST_CTRL_CLK_SRC|NVIC_ST_CTRL_ENABLE|NVIC_ST_CTRL_INTEN;

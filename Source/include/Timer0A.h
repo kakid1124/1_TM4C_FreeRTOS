@@ -31,6 +31,7 @@ extern "C" {
 #endif
 	
 void Timer0A_Delay_Init(void);
+void Timer0A_Delay_Init_8MHz(void);
 void Delay_us(uint32_t us);
 void Delay_ms(uint32_t milliseconds);
 

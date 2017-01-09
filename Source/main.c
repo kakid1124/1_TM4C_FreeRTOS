@@ -116,14 +116,14 @@ int main()
 //*************************************************//
 void System_Init(void)
 {
-	PLL_Init(); // System Clock: 40MHz
+	PLL_Init_8MHz(); // System Clock: 40MHz
 //	PortF_Init();
-	UART_Init();
+	UART_Init_9600bps();
 	
 //	EnableInterrupts();
 	
-//	FPUEnable();
-//	FPULazyStackingEnable();
+	FPUEnable();
+	FPULazyStackingEnable();
 	
 }
 

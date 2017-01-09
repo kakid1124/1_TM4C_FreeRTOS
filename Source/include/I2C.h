@@ -4,7 +4,7 @@ extern "C" {
 	
 void I2C1_Init(void);
 void I2C3_Init(void);
-
+void I2C3_Init_8MHz(void);
 	
 uint32_t I2C1_Write_2Bytes(uint8_t device_address, uint8_t device_register, uint16_t device_data);
 uint16_t I2C1_Read_2Bytes(uint8_t device_address, uint8_t device_register);
